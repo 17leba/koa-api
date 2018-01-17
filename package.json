@@ -1,0 +1,38 @@
+{
+  "name": "koa-api",
+  "version": "1.0.0",
+  "description": "koa api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "api"
+  ],
+  "author": "yinpengbo",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "bcrypt": "^1.0.3",
+    "debug": "^3.1.0",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-json": "^2.0.2",
+    "koa-mysql-session": "0.0.2",
+    "koa-router": "^7.3.0",
+    "koa-session-minimal": "^3.0.4",
+    "log": "^1.4.0",
+    "moment": "^2.20.1",
+    "mysql": "^2.15.0",
+    "node-fetch": "^1.7.3",
+    "qs": "^6.5.1",
+    "redis": "^2.8.0",
+    "request": "^2.83.0",
+    "util": "^0.10.3",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  }
+}
