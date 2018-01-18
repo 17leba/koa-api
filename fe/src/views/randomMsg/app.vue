@@ -12,7 +12,7 @@
 </template>
 <script>
   import { mapState } from 'vuex'
-  import { Spinner } from 'mint-ui'
+  import { Spinner, Toast } from 'mint-ui'
   import myFooter from './components/footer'
   import axios from 'utils/curl'
   export default {
@@ -41,14 +41,17 @@
         this.status = !this.status
       },
       async loveContent (){
-        await axios.post('/api/love/update',{
-          user_id: this.userId,
+        let res = await axios.post('/api/love/update',{
           love_id: this.loveData.loveId,
           type: this.loveData.type,
           title: this.loveData.title,
           tag: this.loveData.hasLoved ? 0 : 1
         })
-        this.loveData.hasLoved = !this.loveData.hasLoved
+        if(res.success){
+          this.loveData.hasLoved = !this.loveData.hasLoved
+        }else{
+          Toast(res.message)
+        }
       }
     },
   }

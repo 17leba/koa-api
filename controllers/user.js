@@ -6,7 +6,8 @@ module.exports = {
 	async login(ctx){
 		let data = {
 			success: false,
-			message: ''
+			message: '',
+			user_id: ''
 		}
 		let postData = ctx.request.body
 		let user = await userService.getExistUser(postData)
@@ -19,6 +20,8 @@ module.exports = {
 			}else{
 				data.success = true
 				data.message = '登录成功'
+				data.user_id = user.user_id
+				data.username = user.username
 				// session
 				let session = ctx.session
 				session.isLogin = true

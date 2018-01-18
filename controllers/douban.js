@@ -51,26 +51,27 @@ module.exports = {
 		})
 	},
 	async getBook (ctx){
+		let bookId
 		if(ctx.query.book_id){
+			bookId = ctx.query.book_id
 			let loveData = await loveService.getLoveForChannel(ctx, {
-				love_id: ctx.query.book_id,
+				love_id: bookId,
 				type: 'book'
 			})
-			ctx.body = Object.assign(loveData,await curl.get(`${config.bookUrl}${ctx.query.book_id}`).catch(err => {
-				book(`${ctx.query.book_id} is not found`)
+			ctx.body = Object.assign(loveData,await curl.get(`${config.bookUrl}${bookId}`).catch(err => {
+				book(`${bookId} is not found`)
 			}))
 			return
 		}
-
-		let { bookId } = random({
+		bookId = random({
 			bookId: config.bookId
-		})
-		// log
+		}).bookId
+		
 		book('book_id is %s', bookId)
 
 		let loveData = await loveService.getLoveForChannel(ctx, {
 			love_id: bookId,
-			type: 'music'
+			type: 'book'
 		})
 		let result = await curl.get(`${config.bookUrl}${bookId}`).catch(err => {
 			book(`${bookId} is not found`)

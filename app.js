@@ -19,7 +19,6 @@ app.use(session({
   	store: new MysqlStore(sessionMysqlConfig)
 }))
 
-console.log(new MysqlStore(sessionMysqlConfig))
 app.use(bodyParser())
 app.use(json())
 app.use(routers.routes()).use(routers.allowedMethods())

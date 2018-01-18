@@ -71,7 +71,11 @@ import { Toast } from 'mint-ui'
         if(!result.success){
           Toast(result.message)
         }else{
-          // redirect
+          this.$store.dispatch('updateUserInfo',{
+            isLogin: true,
+            user_id: result.user_id,
+            username: result.username
+          })
         }
       },
       async register(){
@@ -91,7 +95,11 @@ import { Toast } from 'mint-ui'
         if(!result.success){
           Toast(result.message)
         }else{
-
+          this.$store.dispatch('updateUserInfo',{
+            isLogin: true,
+            user_id: result.user_id,
+            username: result.username
+          })
         }
       },
       toggleTab (type){

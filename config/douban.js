@@ -1,7 +1,7 @@
 const tools = require('./../utils/tools')
 
 module.exports = {
-	// musicChannel: tools.generateArray(-100,100),
+	// musicChannel: tools.generateArray(10000000,10000000),
 	musicChannel: [
 		// 263, //天猫理想生活
 		// 76, //小清新
@@ -13,13 +13,13 @@ module.exports = {
 		// 13, //爵士
 		// 8, //民谣
 		// 7, //摇滚
-		6, //粤语
-		3, //七零
+		// 6, //粤语
+		// 3, //七零
 		// 2, //欧美
 		1, //华语
 		// 17, //日语
 		// 18, //韩语
-		// 194, //流行
+		194, //流行
 		// 257, // 运动
 		// 152, //休息
 		// 32, //咖啡
