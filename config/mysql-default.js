@@ -3,5 +3,5 @@ module.exports =  {
 	HOST:     '127.0.0.1',
 	USER:     'root',
 	PASSWORD: '',
-	DATABASE: 'koa_api'
+	DATABASE: 'test'
 }
