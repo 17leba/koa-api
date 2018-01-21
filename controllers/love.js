@@ -2,7 +2,7 @@ const loveService = require('./../services/love')
 const userService = require('./../services/user')
 
 module.exports = {
-	async updateLoveRecord (ctx){
+	async updateLoveRecord(ctx) {
 		let data = {
 			success: false,
 			message: 'fail'
@@ -10,19 +10,19 @@ module.exports = {
 		let postData = ctx.request.body
 
 		let userInfo = userService.isLogin(ctx)
-		if(userInfo.isLogin){
+		if (userInfo.isLogin) {
 			postData.user_id = userInfo.user_id
 			let record = await loveService.updateLoveRecord(postData)
-			if(record){
+			if (record) {
 				data.success = true
 				data.message = '操作成功'
 			}
-		}else{
+		} else {
 			data.message = '未登录'
 		}
 		ctx.body = data
 	},
-	async getLoveRecords(ctx){
+	async getLoveRecords(ctx) {
 		let result = await loveService.getLoveRecords({
 			user_id: ctx.query.user_id,
 			love_id: ctx.query.love_id,

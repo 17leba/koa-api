@@ -4,7 +4,7 @@ const userService = require('./../services/user')
 const tools = require('./../utils/tools')
 
 module.exports = {
-	async getLoveRecords(data){
+	async getLoveRecords(data) {
 		let page = data.page || 1
 		let limit = data.limit || 20
 		let start = (page - 1) * limit
@@ -19,16 +19,16 @@ module.exports = {
 		})
 		return result
 	},
-	async updateLoveRecord(data){
+	async updateLoveRecord(data) {
 		let result
-		if(parseInt(data.tag) === 1){
+		if (parseInt(data.tag) === 1) {
 			result = await loveModel.insertLoveData({
 				user_id: data.user_id,
 				love_id: data.love_id,
 				type: data.type,
 				title: data.title
 			})
-		}else{
+		} else {
 			result = await loveModel.deleteLoveData({
 				user_id: data.user_id,
 				love_id: data.love_id,
@@ -37,19 +37,19 @@ module.exports = {
 		}
 		return result
 	},
-	async getLoveForChannel(ctx,data){
+	async getLoveForChannel(ctx, data) {
 		let result = {
 			has_loved: false
 		}
 		// 登录状态
 		let userInfo = userService.isLogin(ctx)
-		if(userInfo.isLogin){
+		if (userInfo.isLogin) {
 			let record = await loveModel.getLoveRecords({
 				user_id: userInfo.user_id,
 				love_id: data.love_id,
 				type: data.type
 			})
-			if(record.length){
+			if (record.length) {
 				result.has_loved = true
 			}
 		}

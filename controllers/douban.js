@@ -1,14 +1,16 @@
 const curl = require('./../utils/curl')
 const random = require('./../utils/random')
 const config = require('./../config/douban')
-const loveService = require('./../services/love')
 
-const music = require('debug')('random:music')
-const movie = require('debug')('random:movie')
-const book = require('debug')('random:book')
+const loveService = require('./../services/love')
+const doubanService = require('./../services/douban')
+
+const musicLog = require('debug')('random:music')
+const movieLog = require('debug')('random:movie')
+const bookLog = require('debug')('random:book')
 
 module.exports = {
-	async getMusic (ctx){
+	async getMusic(ctx) {
 		let {
 			channel,
 			kbps,
@@ -23,16 +25,15 @@ module.exports = {
 			app_name: config.musicAppName
 		})
 		// log
-		music('channel is %d,kbps is %s,version is %d', channel, kbps, version)
+		musicLog('channel is %d,kbps is %s,version is %d', channel, kbps, version)
 
-		
-		let result = await curl.get(config.musicUrl,{
+		let result = await curl.get(config.musicUrl, {
 			channel: channel,
 			kbps: kbps,
 			version: version,
 			type: type,
 			app_name: app_name
-		},{
+		}, {
 			headers: config.musicHeaders
 		})
 
@@ -43,39 +44,34 @@ module.exports = {
 
 		ctx.body = Object.assign(result, loveData)
 	},
-	async getMovie (ctx){
+	async getMovie(ctx) {
 		// log
-		movie('search keyword is %s', ctx.params.keyword)
-		ctx.body = await curl.get(config.movieUrl,{
+		movieLog('search keyword is %s', ctx.params.keyword)
+		ctx.body = await curl.get(config.movieUrl, {
 			q: ctx.params.keyword
 		})
 	},
-	async getBook (ctx){
-		let bookId
-		if(ctx.query.book_id){
+	async getBook(ctx) {
+		let bookResult, bookId
+		if (ctx.query.book_id) {
 			bookId = ctx.query.book_id
-			let loveData = await loveService.getLoveForChannel(ctx, {
-				love_id: bookId,
-				type: 'book'
+			bookResult = await curl.get(`${config.bookUrl}${bookId}`)
+		} else {
+			let {
+				randomTag
+			} = random({
+				randomTag: await doubanService.getBookTags()
 			})
-			ctx.body = Object.assign(loveData,await curl.get(`${config.bookUrl}${bookId}`).catch(err => {
-				book(`${bookId} is not found`)
-			}))
-			return
+			bookLog('random_tag is %s', randomTag)
+			bookResult = await doubanService.getBookResult(randomTag)
+			bookId = bookResult.id
 		}
-		bookId = random({
-			bookId: config.bookId
-		}).bookId
-		
-		book('book_id is %s', bookId)
+		bookLog('book_id is %s', bookId)
 
 		let loveData = await loveService.getLoveForChannel(ctx, {
 			love_id: bookId,
 			type: 'book'
 		})
-		let result = await curl.get(`${config.bookUrl}${bookId}`).catch(err => {
-			book(`${bookId} is not found`)
-		})
-		ctx.body = Object.assign(loveData, result)
+		ctx.body = Object.assign(loveData, bookResult)
 	}
 }

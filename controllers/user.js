@@ -1,9 +1,8 @@
 const user = require('debug')('user')
-
 const userService = require('./../services/user')
 
 module.exports = {
-	async login(ctx){
+	async login(ctx) {
 		let data = {
 			success: false,
 			message: '',
@@ -11,13 +10,13 @@ module.exports = {
 		}
 		let postData = ctx.request.body
 		let user = await userService.getExistUser(postData)
-		if(!user){
+		if (!user) {
 			data.message = `${postData.username}不存在`
-		}else{
-			let isPassword = await userService.validPassword(postData.password, user.password)
-			if(!isPassword){
+		} else {
+			let isPassword = userService.validPassword(postData.password, user.password)
+			if (!isPassword) {
 				data.message = '密码错误'
-			}else{
+			} else {
 				data.success = true
 				data.message = '登录成功'
 				data.user_id = user.user_id
@@ -32,10 +31,7 @@ module.exports = {
 
 		ctx.body = data
 	},
-	isLogin(ctx){
-		ctx.body = userService.isLogin(ctx)
-	},
-	async register(ctx){
+	async register(ctx) {
 		let data = {
 			success: false,
 			message: ''
@@ -45,9 +41,9 @@ module.exports = {
 			username: postData.username,
 			email: postData.email
 		})
-		if(result){
+		if (result) {
 			data.message = '此用户已经存在'
-		}else{
+		} else {
 			data.success = true
 			await userService.createUser({
 				username: postData.username,
@@ -56,5 +52,8 @@ module.exports = {
 			})
 		}
 		ctx.body = data
+	},
+	isLogin(ctx) {
+		ctx.body = userService.isLogin(ctx)
 	}
 }

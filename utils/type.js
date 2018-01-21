@@ -1,34 +1,34 @@
 const Type = {
-	isPrototype (para){
+	isPrototype(para) {
 		return Object.prototype.toString.call(para).toLowerCase()
 	},
-	isArray (para){
+	isArray(para) {
 		return Array.isArray(para) || this.isPrototype(para) === '[objetc array]'
 	},
-	isObject (para){
+	isObject(para) {
 		return this.isPrototype(para) === '[object object]'
 	},
-	isFunction (para){
+	isFunction(para) {
 		return this.isPrototype(para) === '[object function]'
 	},
-	isString (para){
+	isString(para) {
 		return typeof para === 'string'
 	},
-	isNumber (para){
+	isNumber(para) {
 		return typeof para === 'number'
 	},
-	isUndefined (para){
+	isUndefined(para) {
 		return typeof para === 'undefined'
 	},
-	isJSON (para){
-		try{
+	isJSON(para) {
+		try {
 			JSON.parse(para)
-		}catch(e){
+		} catch (e) {
 			return false
 		}
 		return true
 	},
-	isNull (para){
+	isNull(para) {
 		return this.isPrototype(para) === '[object null]'
 	}
 }

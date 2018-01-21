@@ -1,42 +1,43 @@
 const tools = require('./../utils/tools')
 
 module.exports = {
-	// musicChannel: tools.generateArray(10000000,10000000),
-	musicChannel: [
-		// 76, //小清新
-		// 188, //布鲁斯
-		// 187, //世界音乐
-		// 28, //动漫
-		// 15, //说唱
-		// 14, //电子
-		// 13, //爵士
-		// 8, //民谣
-		// 7, //摇滚
+	musicChannel: tools.generateArray(-1000, 100000),
+	/*musicChannel: [
+		76, //小清新
+		188, //布鲁斯
+		187, //世界音乐
+		28, //动漫
+		15, //说唱
+		14, //电子
+		13, //爵士
+		8, //民谣
+		7, //摇滚
 		6, //粤语
-		// 3, //七零
+		3, //七零
 		2, //欧美
 		1, //华语
-		// 17, //日语
-		// 18, //韩语
+		17, //日语
+		18, //韩语
 		194, //流行
-		// 257, // 运动
-		// 152, //休息
-		// 32, //咖啡
-		// 77, //Easy
+		257, // 运动
+		152, //休息
+		32, //咖啡
+		77, //Easy
 		153, //工作学习
-		// 152, //户外
-	],
+		152, //户外
+	],*/
 	musicKbps: [64, 128, 192],
-	musicVersion: tools.generateArray(1,100),
+	musicVersion: tools.generateArray(1, 100),
 	musicType: 'n',
 	musicAppName: 'radio_website',
 	musicHeaders: {
 		'Referer': 'https://douban.fm/',
-	    'Host': 'douban.fm',
-	    'Cookie': 'bid=IUt-GFeg5J4'
+		'Host': 'douban.fm',
+		'Cookie': 'bid=IUt-GFeg5J4'
 	},
 	musicUrl: 'https://douban.fm/j/v2/playlist',
 	movieUrl: 'https://api.douban.com/v2/movie/search',
 	bookUrl: 'https://api.douban.com/v2/book/',
-	bookId: tools.generateArray(1000001,7000001)
+	bookSearchUrl: 'https://api.douban.com/v2/book/search',
+	bookCount: [20, 40, 60, 80, 100]
 }

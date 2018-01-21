@@ -78,11 +78,11 @@ import axios from 'utils/curl'
 		margin-right: vw(10);
 	}
 	.book-info{
-		overflow: hidden;
 		p{
 			line-height: 1.5;
 		}
 		.tag{
+			display: inline-block;
 			border-radius: vw(2);
 			background-color: $commonColor;
 			color: #fff;
