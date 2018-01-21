@@ -16,3 +16,4 @@ package-lock.json
 *.njsproj
 *.sln
 config/mysql.js
+static/vue/*
