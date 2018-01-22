@@ -66,7 +66,7 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 999;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
