@@ -5,6 +5,10 @@ $screen-width: 37.5;
     @return $px / $screen-width * 10vw;
 }
 
+@function rem($px) {
+    @return $px / $screen-width * 1rem;
+}
+
 @mixin appearance{
     -webkit-appearance: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0)

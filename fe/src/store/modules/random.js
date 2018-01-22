@@ -1,8 +1,8 @@
-
 const state = {
   curType: '',
   isLoading: true,
-  loveData: {}
+  loveData: {},
+  isShowFeatureBtn: true
 }
 
 const actions = {
@@ -17,6 +17,12 @@ const actions = {
   },
   closeLoading ({ commit }){
     commit('closeLoading')
+  },
+  showFeatureBtn ({ commit }){
+    commit('showFeatureBtn')
+  },
+  hideFeatureBtn ({ commit }){
+    commit('hideFeatureBtn')
   }
 }
 
@@ -32,6 +38,12 @@ const mutations = {
   },
   closeLoading (state){
     state.isLoading = false
+  },
+  showFeatureBtn (state){
+    state.isShowFeatureBtn = true
+  },
+  hideFeatureBtn (state){
+    state.isShowFeatureBtn = false
   }
 }
 

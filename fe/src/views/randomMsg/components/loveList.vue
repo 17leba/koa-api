@@ -28,6 +28,7 @@ import { mapState } from 'vuex'
   		}
   	},
   	created (){
+      this.$store.dispatch('hideFeatureBtn')
   		this.userId && this.getData()
   	},
   	methods: {
@@ -65,8 +66,8 @@ import { mapState } from 'vuex'
 	.love-list{
 		@include line-clamp(1);
 		display: block;
-		line-height: vw(36);
-		text-indent: vw(5);
+		line-height: rem(36);
+		text-indent: rem(5);
 		border-bottom: 1px solid $commonColor;
 		i{
 			color: #999;

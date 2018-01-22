@@ -1,20 +1,20 @@
 <template>
-  <div>
+<div>
     <footer>
-      <router-link 
-        v-for="(item, index) in tab"
-        :to="item.link"
-        :key="index"
-        class="tab" 
-        :class="[{ cur: item.index === curType }, item.index]">{{ item.name }}</router-link>
+        <router-link v-for="(item, index) in tab"
+                     :to="item.link"
+                     :key="index"
+                     class="tab"
+                     :class="[{ cur: item.index === curType }, item.index]">{{ item.name }}</router-link>
     </footer>
-  </div>
+</div>
+
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 export default {
-  data () {
+  data() {
     return {
       tab: [
         {
@@ -52,75 +52,76 @@ export default {
   },
   computed: {
     ...mapState({
-      curType: state => state.random.curType
+          curType: state => state.random.curType
     })
   }
 }
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped="">
 @import '~css/common/var';
 @import '~css/common/mixin';
 footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  width: vw(375);
-  padding: vw(10) 0;
-  background-color: #fff;
-  border-top: 2px solid $commonColor;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    padding: rem(10) 0;
+    background-color: #fff;
+    border-top: 2px solid $commonColor;
 }
-.tab{
-  min-width: vw(25);
-  padding: vw(30) 0 0;
-  font-size: vw(15);
-  text-align: center;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: vw(22) auto;
-  &.cur{
-    color: $commonColor;
-  }
-  &.question{
-    background-image: url(~img/random/question.png);
-    &.cur{
-      background-image: url(~img/random/question-selected.png);
+
+.tab {
+    min-width: rem(25);
+    padding: rem(30) 0 0;
+    font-size: rem(15);
+    text-align: center;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: rem(22) auto;
+    &.cur {
+        color: $commonColor;
     }
-  }
-  &.news{
-    background-image: url(~img/random/news.png);
-    &.cur{
-      background-image: url(~img/random/news-selected.png);
+    &.question {
+        background-image: url(~img/random/question.png);
+        &.cur {
+            background-image: url(~img/random/question-selected.png);
+        }
     }
-  }
-  &.music{
-    background-image: url(~img/random/music.png);
-    &.cur{
-      background-image: url(~img/random/music-selected.png);
+    &.news {
+        background-image: url(~img/random/news.png);
+        &.cur {
+            background-image: url(~img/random/news-selected.png);
+        }
     }
-  }
-  &.book{
-    background-image: url(~img/random/book.png);
-    &.cur{
-      background-image: url(~img/random/book-selected.png);
+    &.music {
+        background-image: url(~img/random/music.png);
+        &.cur {
+            background-image: url(~img/random/music-selected.png);
+        }
     }
-  }
-  &.movie{
-    background-image: url(~img/random/movie.png);
-    &.cur{
-      background-image: url(~img/random/movie-selected.png);
+    &.book {
+        background-image: url(~img/random/book.png);
+        &.cur {
+            background-image: url(~img/random/book-selected.png);
+        }
     }
-  }
-  &.center{
-    background-image: url(~img/random/center.png);
-    &.cur{
-      background-image: url(~img/random/center-selected.png);
+    &.movie {
+        background-image: url(~img/random/movie.png);
+        &.cur {
+            background-image: url(~img/random/movie-selected.png);
+        }
     }
-  }
+    &.center {
+        background-image: url(~img/random/center.png);
+        &.cur {
+            background-image: url(~img/random/center-selected.png);
+        }
+    }
 }
 </style>
