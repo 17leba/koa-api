@@ -5,6 +5,7 @@ const {
 } = require('util')
 const getAsync = promisify(client.get).bind(client)
 const curl = require('./../utils/curl')
+const cheerio = require('cheerio')
 
 const config = require('./../config/zhihu')
 
@@ -22,7 +23,10 @@ module.exports = {
 		}, {
 			headers: config.headers
 		})
-
+		// 处理content中的图片
+		answer.data.forEach((v, i) => {
+			v.content = this.parseContentHtml(v.content)
+		})
 		return Object.assign(question, answer)
 	},
 	async getZHTopic(userTocken = config.urlTocken) {
@@ -52,5 +56,14 @@ module.exports = {
 		// 存入redis
 		client.set('topicList', JSON.stringify(topicList), 'EX', 7 * 24 * 60 * 60)
 		return topicList
+	},
+	parseContentHtml(html) {
+		$ = cheerio.load(html)
+		let $lazy = $('.lazy')
+		// forEach：jQuery对象转换为Dom对象
+		Array.from($lazy).forEach((v, i) => {
+			$(v).attr('src', $(v).data('actualsrc'))
+		})
+		return $.text()
 	}
 }
