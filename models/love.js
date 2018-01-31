@@ -5,7 +5,7 @@ const Type = require('./../utils/type')
 
 module.exports = {
 	async getLoveRecords(options) {
-		let sql = `SELECT * FROM love_list where user_id="${options.user_id}"`
+		let sql = `SELECT * FROM love_list where user_id="${options.user_id}" order by create_time desc`
 		if (options.love_id) {
 			sql = `${sql} and love_id="${options.love_id}"`
 		}
