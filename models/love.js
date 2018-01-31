@@ -5,14 +5,14 @@ const Type = require('./../utils/type')
 
 module.exports = {
 	async getLoveRecords(options) {
-		let sql = `SELECT * FROM love_list where user_id="${options.user_id}" order by create_time desc`
+		let sql = `SELECT * FROM love_list where user_id="${options.user_id}"`
 		if (options.love_id) {
 			sql = `${sql} and love_id="${options.love_id}"`
 		}
 		if (options.type) {
 			sql = `${sql} and type="${options.type}"`
 		}
-		sql = `${sql} limit ${options.start || 0},${options.end || 1}`
+		sql = `${sql} order by create_time desc limit ${options.start || 0},${options.end || 1}`
 		console.log(sql)
 		let result = await query(sql)
 		return result
