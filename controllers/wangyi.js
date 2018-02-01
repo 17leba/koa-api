@@ -2,6 +2,7 @@ const curl = require('./../utils/curl')
 const random = require('./../utils/random')
 const config = require('./../config/wangyi')
 const loveService = require('./../services/love')
+const newsService = require('./../services/news')
 
 const newsLog = require('debug')('random:news')
 
@@ -37,6 +38,8 @@ module.exports = {
 		newsLog('newsId is %s', newsId)
 
 		let result = await curl.get(`https://c.m.163.com/nc/article/${newsId}/full.html`)
+
+		result[newsId] = newsService.handleNewsBody(result[newsId])
 
 		let loveData = await loveService.getLoveForChannel(ctx, {
 			love_id: newsId,
