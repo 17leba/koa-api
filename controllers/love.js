@@ -23,13 +23,24 @@ module.exports = {
 		ctx.body = data
 	},
 	async getLoveRecords(ctx) {
-		let result = await loveService.getLoveRecords({
-			user_id: ctx.query.user_id,
-			love_id: ctx.query.love_id,
-			type: ctx.query.type,
-			page: ctx.query.page,
-			limit: ctx.query.limit
-		})
+		let userInfo = userService.isLogin(ctx)
+		let result = {
+			success: false,
+			message: 'fail',
+			data: []
+		}
+		if(userInfo.isLogin){
+			result.success = true
+			result.data = await loveService.getLoveRecords({
+				user_id: userInfo.user_id,
+				love_id: ctx.query.love_id,
+				type: ctx.query.type,
+				page: ctx.query.page,
+				limit: ctx.query.limit
+			})
+		}else{
+			result.message = '未登录'
+		}
 		ctx.body = result
 	}
 }
