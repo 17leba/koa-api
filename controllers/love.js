@@ -26,7 +26,7 @@ module.exports = {
 		let userInfo = userService.isLogin(ctx)
 		let result = {
 			success: false,
-			message: 'fail',
+			message: '',
 			data: []
 		}
 		if(userInfo.isLogin){
@@ -35,7 +35,7 @@ module.exports = {
 				user_id: userInfo.user_id,
 				love_id: ctx.query.love_id,
 				type: ctx.query.type,
-				page: ctx.query.page,
+				page: +ctx.query.page,
 				limit: ctx.query.limit
 			})
 		}else{
