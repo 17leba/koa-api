@@ -12,7 +12,7 @@ module.exports = {
 		if (options.type) {
 			sql = `${sql} and type="${options.type}"`
 		}
-		sql = `${sql} order by create_time desc limit ${options.start || 0},${options.end || 1}`
+		sql = `${sql} order by create_time desc limit ${options.start || 0},${options.limit || 20}`
 		console.log(sql)
 		let result = await query(sql)
 		return result

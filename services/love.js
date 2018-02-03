@@ -8,14 +8,13 @@ module.exports = {
 		let page = data.page || 1
 		let limit = data.limit || 20
 		let start = (page - 1) * limit
-		let end = start + limit
 
 		let result = await loveModel.getLoveRecords({
 			user_id: data.user_id,
 			love_id: data.love_id,
 			type: data.type,
 			start: start,
-			end: end
+			limit: limit
 		})
 		return result
 	},
