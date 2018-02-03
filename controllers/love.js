@@ -5,7 +5,7 @@ module.exports = {
 	async updateLoveRecord(ctx) {
 		let data = {
 			success: false,
-			message: 'fail'
+			message: ''
 		}
 		let postData = ctx.request.body
 
