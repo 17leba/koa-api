@@ -6,6 +6,8 @@ const wangyi = require('./../controllers/wangyi')
 const user = require('./../controllers/user')
 const love = require('./../controllers/love')
 
+const feedback = require('./../controllers/feedback')
+
 router.get('/random/music', douban.getMusic)
 router.get('/random/movie/:keyword', douban.getMovie)
 router.get('/random/book', douban.getBook)
@@ -18,5 +20,8 @@ router.post('/user/register', user.register)
 router.get('/user/is_login', user.isLogin)
 router.post('/love/update', love.updateLoveRecord)
 router.get('/love/list', love.getLoveRecords)
+
+// feedback
+router.post('/random/feedback', feedback.postContent)
 
 module.exports = router
