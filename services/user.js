@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const securityConfig = require('../config/security')
-const moment = require('moment')
+const config = require('./../config')
 
 const userModel = require('./../models/user')
 const tools = require('./../utils/tools')
@@ -41,6 +41,13 @@ module.exports = {
 		}
 		let session = ctx.session
 		if (session && session.isLogin) {
+			// 后台管理者
+			if(ctx.query.type && ctx.query.type === 'admin'){
+				if(!config.AuthorizedUsers.includes(session.username)){
+					data.message = '当前用户无权访问'
+					return data
+				}
+			}
 			data.isLogin = true
 			data.username = session.username
 			data.user_id = session.user_id

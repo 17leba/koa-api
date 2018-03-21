@@ -28,7 +28,7 @@ module.exports = {
 			user_id="${options.user_id}" 
 			AND love_id="${options.love_id}" 
 			AND type="${options.type}"`
-		let result = await query(sql, options)
+		let result = await query(sql)
 		return result
 	}
 }

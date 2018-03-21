@@ -23,7 +23,7 @@ let get = async function(url, data, options) {
 }
 
 let post = async function(url, data, options = {}) {
-	let response = await axios.post(url, qs.stringify(data), options)
+	let response = await axios.post(url, Type.isObject(data) ? qs.stringify(data) : data, options)
 	return handleStatus(response)
 }
 

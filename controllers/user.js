@@ -1,5 +1,6 @@
 const user = require('debug')('user')
 const userService = require('./../services/user')
+const config = require('./../config')
 
 module.exports = {
 	async login(ctx) {
@@ -13,6 +14,14 @@ module.exports = {
 		if (!user) {
 			data.message = `${postData.username}不存在`
 		} else {
+			// 后台管理者
+			if(postData.type && postData.type === 'admin'){
+				if(!config.AuthorizedUsers.includes(postData.username)){
+					data.message = '当前用户无权访问'
+					ctx.body = data
+					return false
+				}
+			}
 			let isPassword = userService.validPassword(postData.password, user.password)
 			if (!isPassword) {
 				data.message = '密码错误'
