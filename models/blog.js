@@ -10,13 +10,9 @@ module.exports = {
 		return result
 	},
 	async updateArticle(options){
-		let sql = `UPDATE article SET
-			title='${options.title}',
-			content='${options.content}',
-			description='${options.description}'
-			where id=${options.id}`
+		let sql = `UPDATE article SET ? where id=${options.id}`
 		console.log(sql)
-		let result = await query(sql)
+		let result = await query(sql, options)
 		return result
 	},
 	async getArticleRecords (options){
