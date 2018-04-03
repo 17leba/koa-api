@@ -67,5 +67,17 @@ module.exports = {
 			limit: limit
 		})
 		return result
+	},
+	async getSearchList(data){
+		let page = data.page || 1
+		let limit = data.limit || 20
+		let start = (page - 1) * limit
+
+		let result = await blogModel.getSearchList({
+			query: data.query,
+			start: start,
+			limit: limit
+		})
+		return result
 	}
 }

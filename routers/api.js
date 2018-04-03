@@ -36,5 +36,6 @@ router.get('/article/list', blog.getArticleList)
 router.get('/article/:id', blog.getArticleDetail)
 router.get('/tags', blog.getAllTags)
 router.get('/tag/list', blog.getListByTag)
+router.get('/search', blog.getSearchList)
 
 module.exports = router

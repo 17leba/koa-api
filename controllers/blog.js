@@ -123,5 +123,24 @@ module.exports = {
 			result.message = '获取文章列表失败'
 		}
 		ctx.body = result
+	},
+	async getSearchList(ctx){
+		let result = {
+			success: false,
+			message: '',
+			data: []
+		}
+		let data = await blogService.getSearchList({
+			query: ctx.query.query,
+			page: +ctx.query.page,
+			limit: ctx.query.limit
+		})
+		if(data){
+			result.success = true
+			result.data = data
+		}else{
+			result.message = '获取文章列表失败'
+		}
+		ctx.body = result
 	}
 }

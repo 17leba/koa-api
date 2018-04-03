@@ -44,5 +44,11 @@ module.exports = {
 		console.log(sql)
 		let result = await query(sql)
 		return result
+	},
+	async getSearchList(options){
+		let sql = `SELECT id,title,description,create_time,tags FROM article where Match(content) Against('${options.query}') order by create_time desc limit ${options.start || 0},${options.limit || 20}`
+		console.log(sql)
+		let result = await query(sql)
+		return result
 	}
 }
