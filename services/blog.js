@@ -8,7 +8,8 @@ module.exports = {
 				admin: data.admin,
 				title: data.title,
 				description: data.content.slice(0,255),
-				content: data.content
+				content: data.content,
+				tags: data.tags
 			})
 			
 		}else{
@@ -16,7 +17,8 @@ module.exports = {
 				id: data.article_id,
 				title: data.title,
 				description: data.content.slice(0,255),
-				content: data.content
+				content: data.content,
+				tags: data.tags
 			})
 		}
 		return result
@@ -41,6 +43,28 @@ module.exports = {
 	async deleteArticle(data){
 		let result = await blogModel.deleteArticle({
 			id: data.id
+		})
+		return result
+	},
+	async getAllTags(){
+		let data = await blogModel.getAllTags()
+		let result = []
+		data.forEach((data) => {
+			result = result.concat(data.tags.split('|'))
+		})
+		// 去重
+		result = [...new Set(result)]
+		return result
+	},
+	async getListByTag(data){
+		let page = data.page || 1
+		let limit = data.limit || 20
+		let start = (page - 1) * limit
+
+		let result = await blogModel.getListByTag({
+			tag: data.tag,
+			start: start,
+			limit: limit
 		})
 		return result
 	}

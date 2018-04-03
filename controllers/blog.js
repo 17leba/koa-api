@@ -41,11 +41,16 @@ module.exports = {
 			message: '',
 			data: []
 		}
-		result.success = true
-		result.data = await blogService.getArticleList({
+		let data = await blogService.getArticleList({
 			page: +ctx.query.page,
 			limit: ctx.query.limit
 		})
+		if(data){
+			result.success = true
+			result.data = data
+		}else{
+			res.message = '获取文章列表失败'
+		}
 		ctx.body = result
 	},
 	async getArticleDetail(ctx){
@@ -82,6 +87,40 @@ module.exports = {
 		if(data){
 			result.success = true
 			result.message = '删除成功'
+		}
+		ctx.body = result
+	},
+	async getAllTags(ctx){
+		let result = {
+			success: false,
+			message: '',
+			data: []
+		}
+		let data = await blogService.getAllTags()
+		if(data){
+			result.success = true
+			result.data = data
+		}else{
+			result.message = '获取tags失败'
+		}
+		ctx.body = result
+	},
+	async getListByTag(ctx){
+		let result = {
+			success: false,
+			message: '',
+			data: []
+		}
+		let data = await blogService.getListByTag({
+			tag: ctx.query.tag,
+			page: +ctx.query.page,
+			limit: ctx.query.limit
+		})
+		if(data){
+			result.success = true
+			result.data = data
+		}else{
+			result.message = '获取文章列表失败'
 		}
 		ctx.body = result
 	}

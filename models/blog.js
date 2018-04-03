@@ -32,5 +32,17 @@ module.exports = {
 		console.log(sql)
 		let result = await query(sql)
 		return result
+	},
+	async getAllTags(){
+		let sql = `SELECT distinct tags FROM article where tags is not NULL`
+		console.log(sql)
+		let result = await query(sql)
+		return result
+	},
+	async getListByTag(options){
+		let sql = `SELECT * FROM article where tags like '%${options.tag}%' order by create_time desc limit ${options.start || 0},${options.limit || 20}`
+		console.log(sql)
+		let result = await query(sql)
+		return result
 	}
 }

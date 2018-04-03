@@ -34,5 +34,7 @@ router.post('/article/save', blog.updateArticle)
 router.post('/article/delete', blog.deleteArticle)
 router.get('/article/list', blog.getArticleList)
 router.get('/article/:id', blog.getArticleDetail)
+router.get('/tags', blog.getAllTags)
+router.get('/tag/list', blog.getListByTag)
 
 module.exports = router
