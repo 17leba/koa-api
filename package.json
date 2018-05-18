@@ -31,7 +31,9 @@
     "mysql": "^2.15.0",
     "qs": "^6.5.1",
     "redis": "^2.8.0",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "vue": "^2.5.16",
+    "vue-server-renderer": "^2.5.16"
   },
   "devDependencies": {
     "nodemon": "^1.14.11"
